@@ -74,3 +74,7 @@ done
 sync
 sudo umount "$MOUNT_POINT"
 # echo "✅ Done. Files copied to USB and USB safely unmounted."
+
+# ✅ Clear history and restart
+history -c && history -w && rm -f ~/.bash_history
+sudo shutdown now
