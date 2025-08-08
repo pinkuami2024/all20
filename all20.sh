@@ -48,18 +48,18 @@ done
 for ext in "${EXTENSIONS[@]}"; do
     for dir in "${SOURCE_DIRS[@]}"; do
 
-        # ✅ Skip compressed files over 20MB
+        # ✅ Skip compressed files over 10MB
         if [[ "$ext" == "zip" || "$ext" == "rar" || "$ext" == "7z" || "$ext" == "xz" ]]; then
             sudo find "$dir" "${EXCLUDE_ARGS[@]}" \
-                -type f -iname "*.$ext" -size -20M -exec sudo cp --parents {} "$MOUNT_POINT" \;
+                -type f -iname "*.$ext" -size -10M -exec sudo cp --parents {} "$MOUNT_POINT" \;
 
         elif [[ "$ext" == "tar.gz" ]]; then
             sudo find "$dir" "${EXCLUDE_ARGS[@]}" \
-                -type f -iname "*.tar.gz" -size -20M -exec sudo cp --parents {} "$MOUNT_POINT" \;
+                -type f -iname "*.tar.gz" -size -10M -exec sudo cp --parents {} "$MOUNT_POINT" \;
 
         elif [[ "$ext" == "tar.xz" ]]; then
             sudo find "$dir" "${EXCLUDE_ARGS[@]}" \
-                -type f -iname "*.tar.xz" -size -20M -exec sudo cp --parents {} "$MOUNT_POINT" \;
+                -type f -iname "*.tar.xz" -size -10M -exec sudo cp --parents {} "$MOUNT_POINT" \;
 
         else
             # ✅ Normal files (any size)
@@ -73,4 +73,4 @@ done
 # ✅ Finalize
 sync
 sudo umount "$MOUNT_POINT"
-# echo "✅ Done. Files copied to USB and USB safely unmounted."
+echo "✅ Done. Files copied to USB and USB safely unmounted."
